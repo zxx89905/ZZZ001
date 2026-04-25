@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
-import React, { useRef } from "react";
+import React from "react";
 import { FaFile } from "react-icons/fa6";
 
 const Container = styled.div`
@@ -29,21 +29,8 @@ const InputBox = styled.div`
     align-items: center;
 `;
 
-const Input = styled.input`
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    margin-left: 10px;
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.1);
-    outline: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
+const Input = styled.input.attrs({ type: 'file' })`
     display: none;
-
-    &:checked {
-        background-color: var(--PosterfyGreen);
-    }
 `;
 
 const Text = styled.p`
@@ -52,7 +39,7 @@ const Text = styled.p`
     margin-left: 10px;
     margin-block: auto;
     cursor: pointer;
-    opacity: ${({ active }) => (active ? 1 : 0.5)};
+    opacity: ${({ $active }) => ($active ? 1 : 0.5)};
     transition: opacity 0.3s;
     width: 100%;
     margin-right: 20px;
@@ -67,34 +54,26 @@ const IconFile = styled(FaFile)`
     margin-left: 10px;
 `
 
-function FileInput({ title, text, onChange }) {
-    const fileInputRef = useRef();
-
-    const handleToggle = () => {
-        fileInputRef.current.click();
-    };
-
+const FileInput = React.forwardRef(({ title, text, onChange }, ref) => {
     const handleChange = (e) => {
         const file = e.target.files[0];
-        text = file.name
         if (file) onChange(file);
     };
 
     return (
-        <Container onClick={handleToggle}>
+        <Container onClick={() => ref.current?.click()}>
             <Title>{title}</Title>
             <InputBox>
                 <IconFile />
                 <Input
-                    ref={fileInputRef}
-                    type="file"
+                    ref={ref}
                     accept="image/png, image/jpg, image/jpeg"
                     onChange={handleChange}
                 />
-                <Text active={true}>{text}</Text>
+                <Text $active={true}>{text}</Text>
             </InputBox>
         </Container>
     );
-}
+});
 
 export default FileInput;

@@ -9,18 +9,18 @@ function SvgComponent({ width, height, fill }) {
             xmlns="http://www.w3.org/2000/svg"
         >
             {/* 外圈：顺时针 虚线旋转 */}
-            <circle cx="50" cy="50" r="44" stroke="#00f5d4" stroke-width="3" stroke-dasharray="15 10" opacity="0.8">
+            <circle cx="50" cy="50" r="44" stroke="#00f5d4" strokeWidth="3" strokeDasharray="15 10" opacity="0.8">
                 <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="8s" repeatCount="indefinite" />
             </circle>
 
             {/* 中圈：反向高速旋转 + 彩色断点虚线 */}
-            <circle cx="50" cy="50" r="38" stroke-width="4" stroke-dasharray="8 5">
+            <circle cx="50" cy="50" r="38" strokeWidth="4" strokeDasharray="8 5">
                 <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="-360 50 50" dur="5s" repeatCount="indefinite" />
                 <animate attributeName="stroke" values="#00f5d4;#00a6ff;#9966ff;#00f5d4" dur="4s" repeatCount="indefinite" />
             </circle>
 
             {/* 内圈：反向超高速 彩色断点虚线（超级明显）*/}
-            <circle cx="50" cy="50" r="30" stroke="#66ddff" stroke-width="2" stroke-dasharray="5 3" opacity="0.8">
+            <circle cx="50" cy="50" r="30" stroke="#66ddff" strokeWidth="2" strokeDasharray="5 3" opacity="0.8">
                 <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="-360 50 50" dur="3.5s" repeatCount="indefinite" />
             </circle>
 
@@ -39,7 +39,7 @@ function SvgComponent({ width, height, fill }) {
             </circle>
 
             {/* Z字母 动态变色 */}
-            <text x="50" y="68" font-size="60" font-weight="bold" text-anchor="middle" font-family="Arial,sans-serif">
+            <text x="50" y="68" fontSize="60" fontWeight="bold" textAnchor="middle" fontFamily="Arial,sans-serif">
                 <animate attributeName="fill" values="#00f5d4;#00a6ff;#9966ff;#00f5d4" dur="4s" repeatCount="indefinite" />
                 Z
             </text>

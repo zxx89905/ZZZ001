@@ -272,9 +272,9 @@ const ThemeCard = styled.button`
     left: 0;
     right: 0;
     bottom: 0;
-    border: ${(props) => (props.active ? "2px solid var(--PosterfyGreen)" : "1px solid rgba(255, 255, 255, 0.1)")};
+    border: ${(props) => (props.$active ? "2px solid var(--PosterfyGreen)" : "1px solid rgba(255, 255, 255, 0.1)")};
     border-radius: 8px;
-    box-shadow: ${(props) => (props.active ? "0 0 10px var(--PosterfyGreen)" : "none")};
+    box-shadow: ${(props) => (props.$active ? "0 0 10px var(--PosterfyGreen)" : "none")};
     transition: all 0.3s ease;
   }
   
@@ -407,7 +407,7 @@ function Footer() {
               <ThemeCard
                 key={themeOption.id}
                 color={themeOption.color}
-                active={theme === themeOption.id}
+                $active={theme === themeOption.id}
                 onClick={() => handleThemeChange(themeOption.id)}
                 aria-label={`${t("SwitchTo", "Switch to")} ${themeOption.name} ${t("Theme").toLowerCase()}`}
               >
@@ -419,7 +419,7 @@ function Footer() {
         </ThemeSection>
 
         <SocialSection>
-          <GithubLink href="https://github.com/zxx89905/ZJT" target="blank">
+          <GithubLink href="https://github.com/zxx89905/ZZZ001" target="blank">
             <FaGithub /> {t("ViewGitHub", "GitHub")}
           </GithubLink>
         </SocialSection>
@@ -429,4 +429,3 @@ function Footer() {
 }
 
 export default Footer
-

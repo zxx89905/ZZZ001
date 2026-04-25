@@ -48,7 +48,7 @@ const Text = styled.p`
     margin-left: 10px;
     margin-block: auto;
     cursor: pointer;
-    opacity: ${({ active }) => (active ? 1 : 0.5)};
+    opacity: ${({ $active }) => ($active ? 1 : 0.5)};
     transition: opacity 0.3s;
 `;
 
@@ -64,7 +64,7 @@ function CheckInput({ title, text, value, onChange }) {
                     readOnly
                     type="checkbox"
                 />
-                <Text active={value}>{text}</Text>
+                <Text $active={value}>{text}</Text>
             </InputBox>
         </Container>
     );

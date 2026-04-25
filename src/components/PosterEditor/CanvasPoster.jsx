@@ -17,6 +17,11 @@ const CanvasPoster = ({ onImageReady, posterData, generatePoster, onTitleSizeAdj
             posterData.marginCover = parseInt(posterData.marginCover) || 0;
 
             const loadCover = async (url) => {
+                // ✅ 如果没有封面，使用空白透明图，永远不 404
+                if (!url || url === '/default-cover.png') {
+                    url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+                }
+
                 const image = new Image();
                 image.crossOrigin = "anonymous";
                 image.src = url;
@@ -39,6 +44,8 @@ const CanvasPoster = ({ onImageReady, posterData, generatePoster, onTitleSizeAdj
                         }
                         resolve();
                     };
+                    // ✅ 就算图片加载失败，也不报错
+                    image.onerror = () => resolve();
                 });
             };
 
@@ -151,7 +158,6 @@ const CanvasPoster = ({ onImageReady, posterData, generatePoster, onTitleSizeAdj
                 ctx.fillRect(0, 0, width, height);
             };
 
-            // 🔥 彻底删除二维码请求
             await drawBackground();
             await loadCover(posterData.albumCover);
             await drawAlbumInfos();
@@ -159,7 +165,6 @@ const CanvasPoster = ({ onImageReady, posterData, generatePoster, onTitleSizeAdj
                 await drawTracklist();
             }
 
-            // ✅ 直接生成海报
             const imageUrl = canvas.toDataURL('image/png');
             onImageReady(imageUrl);
         };
